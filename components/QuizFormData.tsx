@@ -70,10 +70,10 @@ const QuizFormData = ({ quiz, name }: any) => {
 
                 <div className='space-y-6'>
                   <div className='flex justify-center underline '>
-                    Q:{decodestring(quiz[questionnumber].question)}
+                    {decodestring(quiz[questionnumber].question)}
                   </div>
                   {quiz[questionnumber].option.map(
-                    (options: Array<string>, key: number) => {
+                    (options: string[], key: number) => {
                       return (
                         <div key={key} className='mt-1'>
                           <input
@@ -81,11 +81,15 @@ const QuizFormData = ({ quiz, name }: any) => {
                             disabled={selected}
                             onClick={() => handelCheck(options)}
                             defaultValue={options}
-                            className={` disabled:opacity-70 ${
-                              options === quiz[questionnumber].correct_answer
-                                ? 'focus-within:bg-green-500 bg-green'
-                                : 'focus-within:bg-red-500'
-                            }  appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                            className={` disabled:opacity-70  appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+                            ${
+                              selected
+                                ? options ===
+                                  quiz[questionnumber].correct_answer
+                                  ? 'bg-green-500 bg-green'
+                                  : 'bg-red-500'
+                                : ''
+                            } `}
                           />
                         </div>
                       )
